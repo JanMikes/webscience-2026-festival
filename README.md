@@ -1,16 +1,49 @@
-# React + Vite
+# WebScience 2026 Festival
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite site for the WebScience 2026 festival.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 22+ and npm — or Docker
 
-## React Compiler
+## Run locally (npm)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+The dev server is then available at http://localhost:5173.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Other scripts:
+
+```bash
+npm run build      # production build to dist/
+npm run preview    # serve the production build locally
+npm run lint       # run ESLint
+```
+
+## Run locally (Docker)
+
+Build and run the production image:
+
+```bash
+docker build -t webscience-2026-festival .
+docker run --rm -p 8080:80 webscience-2026-festival
+```
+
+Open http://localhost:8080.
+
+### Pull the prebuilt image from GHCR
+
+Every push to `main` publishes a multi-tag image to GitHub Container Registry:
+
+```bash
+docker run --rm -p 8080:80 ghcr.io/janmikes/webscience-2026-festival:latest
+```
+
+## CI
+
+`.github/workflows/docker.yml` builds the Docker image on every push and pull
+request, and pushes tags `latest`, `main`, and `sha-<short>` to
+`ghcr.io/janmikes/webscience-2026-festival` on push to `main`.
